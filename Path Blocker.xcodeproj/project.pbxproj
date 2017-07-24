@@ -17,6 +17,11 @@
 		3568584E1F200DB6002C995C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3568584C1F200DB6002C995C /* LaunchScreen.storyboard */; };
 		356858591F200DB6002C995C /* Path_BlockerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356858581F200DB6002C995C /* Path_BlockerTests.swift */; };
 		356858641F200DB6002C995C /* Path_BlockerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356858631F200DB6002C995C /* Path_BlockerUITests.swift */; };
+		356858721F200E1E002C995C /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356858711F200E1E002C995C /* CreateMaze.swift */; };
+		356858741F200F57002C995C /* CreateGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356858731F200F57002C995C /* CreateGrid.swift */; };
+		356858761F201103002C995C /* mazeWall.png in Resources */ = {isa = PBXBuildFile; fileRef = 356858751F201103002C995C /* mazeWall.png */; };
+		3578E5141F21178500383B05 /* Monsters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578E5131F21178500383B05 /* Monsters.swift */; };
+		35CFEA5F1F26574B00D9925F /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CFEA5E1F26574B00D9925F /* Cells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,11 @@
 		3568585F1F200DB6002C995C /* Path BlockerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Path BlockerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		356858631F200DB6002C995C /* Path_BlockerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path_BlockerUITests.swift; sourceTree = "<group>"; };
 		356858651F200DB6002C995C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		356858711F200E1E002C995C /* CreateMaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
+		356858731F200F57002C995C /* CreateGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGrid.swift; sourceTree = "<group>"; };
+		356858751F201103002C995C /* mazeWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mazeWall.png; path = ../../../../Downloads/mazeWall.png; sourceTree = "<group>"; };
+		3578E5131F21178500383B05 /* Monsters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monsters.swift; sourceTree = "<group>"; };
+		35CFEA5E1F26574B00D9925F /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +117,12 @@
 				3568583F1F200DB6002C995C /* GameScene.sks */,
 				356858411F200DB6002C995C /* Actions.sks */,
 				356858431F200DB6002C995C /* GameScene.swift */,
+				35CFEA5E1F26574B00D9925F /* Cells.swift */,
+				356858711F200E1E002C995C /* CreateMaze.swift */,
+				3578E5131F21178500383B05 /* Monsters.swift */,
+				356858731F200F57002C995C /* CreateGrid.swift */,
 				356858451F200DB6002C995C /* GameViewController.swift */,
+				356858751F201103002C995C /* mazeWall.png */,
 				356858471F200DB6002C995C /* Main.storyboard */,
 				3568584A1F200DB6002C995C /* Assets.xcassets */,
 				3568584C1F200DB6002C995C /* LaunchScreen.storyboard */,
@@ -241,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356858761F201103002C995C /* mazeWall.png in Resources */,
 				356858491F200DB6002C995C /* Main.storyboard in Resources */,
 				356858401F200DB6002C995C /* GameScene.sks in Resources */,
 				3568584B1F200DB6002C995C /* Assets.xcassets in Resources */,
@@ -270,6 +286,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356858741F200F57002C995C /* CreateGrid.swift in Sources */,
+				35CFEA5F1F26574B00D9925F /* Cells.swift in Sources */,
+				356858721F200E1E002C995C /* CreateMaze.swift in Sources */,
+				3578E5141F21178500383B05 /* Monsters.swift in Sources */,
 				356858441F200DB6002C995C /* GameScene.swift in Sources */,
 				356858461F200DB6002C995C /* GameViewController.swift in Sources */,
 				3568583E1F200DB6002C995C /* AppDelegate.swift in Sources */,
@@ -519,6 +539,7 @@
 				3568586A1F200DB6002C995C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3568586B1F200DB6002C995C /* Build configuration list for PBXNativeTarget "Path BlockerTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +548,7 @@
 				3568586D1F200DB6002C995C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3568586E1F200DB6002C995C /* Build configuration list for PBXNativeTarget "Path BlockerUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +557,7 @@
 				356858701F200DB6002C995C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

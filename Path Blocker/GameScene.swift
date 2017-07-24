@@ -6,84 +6,153 @@
 //  Copyright © 2017 Shreya Basireddy. All rights reserved.
 //
 
+
 import SpriteKit
 import GameplayKit
 
+enum wallSides {
+    case upSide, downSide, leftSide, rightSide, noSide
+}
+
 class GameScene: SKScene {
-    
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    var mazeWall: SKNode!
+    var monsterNode: SKNode! //THIS IS FOR THE MONSTER CLASS WHICH ISNT MADEYET WHOOPS
+    var maze = Maze(gridSize: 10)
+    //var maze = Maze()
+    let wallTexture = SKTexture(imageNamed: "mazeWall") //NEW CODE!
+    var backgroundColorCustom = UIColor(red: 255, green: 244, blue: 231, alpha: 4.0)
+    var tileSize = 0
     
     override func didMove(to view: SKView) {
+        /* Set reference to mazeWall node */
+        mazeWall = self.childNode(withName: "mazeWall")
+        monsterNode = self.childNode(withName: "monster") //THIS IS FOR THE MONSTER CLASS WHICH ISNT MADEYET WHOOPS
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        //FIND THE MAX SIZE OF THE SCREEN
+        let screenSize = UIScreen.main.bounds
+        let maxWidth = Int(screenSize.width) / 27 //maze.gridSize/2
+        let maxHeight = Int(screenSize.height) / 27 //maze.gridSize/2
+        tileSize = max(maxWidth, maxHeight)
+        
+        //going through each cell and checking if it is true in order to place a wall
+        for x in 1..<self.maze.gridSize+1 {
+            for y in 1..<self.maze.gridSize+1 {
+                //here
+                //set the value of  location of walls for evey cell
+                if (self.maze.down[x,y]) == true {
+                    //NEW CODE
+                    //let wall = MazeWall(side: side.down)
+                    let wall = SKSpriteNode(texture: wallTexture)
+                    let centerTile = ConvertGridPositionToLocationPoint(x: x, y: y)
+                    let xPos = centerTile.x
+                    let yPos = centerTile.y - CGFloat(tileSize) / 2
+                    wall.position = CGPoint(x: xPos, y: yPos)
+                    wall.size = CGSize(width: tileSize, height: tileSize / 9)
+                    self.addChild(wall)
+                }
+                
+                if (self.maze.up[x,y]) == true {
+                    let wall = SKSpriteNode(texture: wallTexture)
+                    let centerTile = ConvertGridPositionToLocationPoint(x: x, y: y)
+                    let xPos = centerTile.x
+                    let yPos = centerTile.y + CGFloat(tileSize) / 2
+                    wall.position = CGPoint(x: xPos, y: yPos)
+                    wall.size = CGSize(width: tileSize, height: tileSize / 9)
+                    self.addChild(wall)
+                }
+                
+                if (self.maze.left[x,y]) == true{
+                    let wall = SKSpriteNode(texture: wallTexture)
+                    let centerTile = ConvertGridPositionToLocationPoint(x: x, y: y)
+                    let xPos = centerTile.x - CGFloat(tileSize) / 2
+                    let yPos = centerTile.y
+                    wall.position = CGPoint(x: xPos, y: yPos)
+                    wall.size = CGSize(width: tileSize / 9, height: tileSize)
+                    self.addChild(wall)
+
+                }
+                if (self.maze.right[x,y]) == true {
+                    let wall = SKSpriteNode(texture: wallTexture)
+                    let centerTile = ConvertGridPositionToLocationPoint(x: x, y: y)
+                    let xPos = centerTile.x + CGFloat(tileSize) / 2
+                    let yPos = centerTile.y
+                    wall.position = CGPoint(x: xPos, y: yPos)
+                    wall.size = CGSize(width: tileSize / 9, height: tileSize)
+                    self.addChild(wall)
+                }
+            }
         }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+    }//end of func didMove
+    
+    func ConvertGridPositionToLocationPoint(x: Int, y: Int) -> (CGPoint) {
+        //self.maze.visitedCells[x,y]
+        let gridX = x * tileSize + tileSize/2
+        let gridY = y * tileSize + tileSize/2
+        let locationPoint = CGPoint(x: gridX, y: gridY)
+        return (locationPoint)
     }
     
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+    func ConvertLocationPointToGridPosition(location: CGPoint) -> (x: Int, y: Int, side: wallSides) {
+        var xPoint: CGFloat
+        var yPoint: CGFloat
+        xPoint = location.x / CGFloat(tileSize)
+        yPoint = location.y / CGFloat(tileSize)
+        let yPointRemainder = yPoint.truncatingRemainder(dividingBy: 1)
+        let xPointRemainder = xPoint.truncatingRemainder(dividingBy: 1)
+        var wallSide: wallSides
+        
+        if yPointRemainder < 0.2 && xPointRemainder < 0.8 && xPointRemainder > 0.2 {
+            wallSide = .downSide
+        } else if yPointRemainder > 0.8 && xPointRemainder < 0.8 && xPointRemainder > 0.2 {
+            wallSide = .upSide
+        } else if xPointRemainder < 0.2 && yPointRemainder < 0.8 && yPointRemainder > 0.2 {
+            wallSide = .leftSide
+        } else if  xPointRemainder > 0.8 && yPointRemainder < 0.8 && yPointRemainder > 0.2 {
+            wallSide = .rightSide
+        } else {
+            wallSide = .noSide
+        }//end of if-then
+        
+        return(Int(xPoint), Int(yPoint), wallSide)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        //actually user tapping a wall
+        //send a message that the wall has been tapped
+        let touch = touches.first!              // Get the first touch
+        let location  = touch.location(in: self) //find the location of the touch in the view
+        let nodeAtPoint = atPoint(location) //find the node at that location
+        if nodeAtPoint.name == "mazeWall" {
+            let convertLocation = ConvertLocationPointToGridPosition(location: location)
+            //self.removeChildren(in: [self.atPoint(location)])
+            if convertLocation.side == wallSides.downSide {
+                //code
+            }
+        }//end of nodeAtPoint = mazeWall if-then statement
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* steps to do this:
+ 1) create a wall in spriteKit
+ 2) connect wall to code in the Maze class
+ 3) create a function in which when a cell side is true, the wall is dropped in that position
+ 4) somehow make touches began release a signal that alerts the MoveWalls function in the Maze class
+ 5) actually move the frickin walls
+ */
