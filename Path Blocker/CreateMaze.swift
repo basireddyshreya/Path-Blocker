@@ -23,13 +23,26 @@ class Maze {
     
     var gridSize = 10
     
+    /*var xEntrance: UInt32
+    var exit: UInt32
+    var yEntrance: UInt32*/
+    
+    var xOpening: Int?
+    var yOpening: Int?
+    var finalExit: Int?
+
     /**
      Init method.
      
      :param: gridSize Int indicating the width and hight of the maze in number of cells, with width = height = gridSize
      :param: screenSize Int indicating the width and hight of the view, with width = height = screenSize
      */
+    
+    //init(gridSize: Int, xEntrance: UInt32, exit: UInt32, yEntrance: UInt32) {
     init(gridSize: Int) {
+        /*self.xEntrance = xEntrance
+        self.exit = exit
+        self.yEntrance = yEntrance*/
         
         visitedCells = Grid<Bool>(rows: (gridSize+2), columns: (gridSize+2), defaultValue: false)
         up = Grid<Bool>(rows: (gridSize+2), columns: (gridSize+2), defaultValue: true)
@@ -50,9 +63,10 @@ class Maze {
         }
         
         dropWalls(x: 1, y:1, gridSize: gridSize)
-        createOpenings()
         
-        //view = drawView(gridSize:gridSize, screenSize:screenSize)
+        //createOpenings(xEntrance: xEntrance, exit: exit, yEntrance: yEntrance)
+        createOpenings()
+
     }
     
     /**
@@ -100,30 +114,34 @@ class Maze {
         }//end of while visited cells
     }//end of func drop walls
     
-    func createOpenings() {
+    //func createOpenings(xEntrance: UInt32, exit: UInt32, yEntrance: UInt32) {
+    func createOpenings() { //-> Int {
         //Create random entrances and a random exit
-        let xEntrance = arc4random_uniform(UInt32(gridSize)+1) //CHANGED THIS TO 14 FROM 15
-        let exit = arc4random_uniform(UInt32(gridSize+1)) //CHANGED THIS TO 14 FROM 15
-        up[Int(xEntrance),gridSize] = false
-        down[Int(exit),1] = false
-        //CHANGED THIS TO -1?
+        let xEntrance = arc4random_uniform(UInt32(gridSize-1)) + 1
+        let exit = arc4random_uniform(UInt32(gridSize-2)) + 1
+        let yEntrance = arc4random_uniform(UInt32(gridSize-3)) + 3
+    
+        xOpening = Int(xEntrance)
+        yOpening = Int(yEntrance)
+        finalExit = Int(exit)
         
-        let yEntrance = arc4random_uniform(UInt32(gridSize)+1)
+        up[Int(xEntrance),gridSize] = false
+        up[Int(exit),0] = false
         right[gridSize, Int(yEntrance)] = false
         //TRY TO FIGURE OUT A WAY TO HAVE THE LEFT OR RIGHT Y WALLS??
-        //CHANGED THIS TO -1 AGAIN????
         
         // Open up the start and end
         //up[1,gridSize] = false
         //down[1,gridSize] = false
         //up[gridSize,1] = false
         //down[gridSize,1] = false
+        
+        //return Int(xEntrance)
     }//end of func createOpenings
-    
+
 
 
     func moveWalls() {
-        //if user taps a wall, wall moves to the open space next to it (down/right space)
             //if wall is down or up
                 //move right
                 //if right is blocked by an existing wall, move left
@@ -136,7 +154,7 @@ class Maze {
                         //if same wall next to it/connected wall by cell is tapped, that wall moves in same direction
         
         //walls move max space it can move. no random moving
-        //yep thats basically is
+        //yep thats basically i
         
     }//end of func moveWalls
 
