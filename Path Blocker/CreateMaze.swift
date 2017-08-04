@@ -140,24 +140,6 @@ class Maze {
     }//end of func createOpenings
 
 
-
-    func moveWalls() {
-            //if wall is down or up
-                //move right
-                //if right is blocked by an existing wall, move left
-                    //if monster is there, don't move
-                        //if same wall next to it/connected wall by cell is tapped, that wall moves in same direction
-            //else if wall is left or right
-                //move down
-                //if down is blocked by an existing wall, move up
-                    //if monster is there, don't move
-                        //if same wall next to it/connected wall by cell is tapped, that wall moves in same direction
-        
-        //walls move max space it can move. no random moving
-        //yep thats basically i
-        
-    }//end of func moveWalls
-
 }
 
 
