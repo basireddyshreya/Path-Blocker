@@ -30,6 +30,7 @@ class Maze {
     var xOpening: Int?
     var yOpening: Int?
     var finalExit: Int?
+    var sideExit: Int?
 
     /**
      Init method.
@@ -114,29 +115,32 @@ class Maze {
         }//end of while visited cells
     }//end of func drop walls
     
-    //func createOpenings(xEntrance: UInt32, exit: UInt32, yEntrance: UInt32) {
     func createOpenings() { //-> Int {
         //Create random entrances and a random exit
         let xEntrance = arc4random_uniform(UInt32(gridSize-1)) + 1
         let exit = arc4random_uniform(UInt32(gridSize-2)) + 1
         let yEntrance = arc4random_uniform(UInt32(gridSize-3)) + 3
+        let yExit = arc4random_uniform(UInt32(gridSize-3)) + 3
     
         xOpening = Int(xEntrance)
         yOpening = Int(yEntrance)
         finalExit = Int(exit)
+        sideExit = Int(yExit)
         
         up[Int(xEntrance),gridSize] = false
+        
         up[Int(exit),0] = false
+      /*  up[Int(exit), 1] = false
+        left[Int(exit), 1] = false
+        right[Int(exit), 1] = false */
+        
         right[gridSize, Int(yEntrance)] = false
-        //TRY TO FIGURE OUT A WAY TO HAVE THE LEFT OR RIGHT Y WALLS??
         
-        // Open up the start and end
-        //up[1,gridSize] = false
-        //down[1,gridSize] = false
-        //up[gridSize,1] = false
-        //down[gridSize,1] = false
-        
-        //return Int(xEntrance)
+        right[0, Int(sideExit!)] = false
+       /* up[1, Int(sideExit!)] = false
+        down[1, Int(sideExit!)] = false
+        right[1, Int(sideExit!)] = false */
+
     }//end of func createOpenings
 
 

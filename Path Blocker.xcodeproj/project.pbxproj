@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35136AC71F39501D005E0E7D /* PauseMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 35136AC61F39501D005E0E7D /* PauseMenu.sks */; };
+		35136AC91F39502D005E0E7D /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35136AC81F39502D005E0E7D /* PauseMenu.swift */; };
+		35136ACD1F396970005E0E7D /* continueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 35136ACC1F396970005E0E7D /* continueButton.png */; };
+		35136ACF1F3A2A3C005E0E7D /* leftFlag.png in Resources */ = {isa = PBXBuildFile; fileRef = 35136ACE1F3A2A3C005E0E7D /* leftFlag.png */; };
+		35136AD11F3A2A42005E0E7D /* rightFlag.png in Resources */ = {isa = PBXBuildFile; fileRef = 35136AD01F3A2A42005E0E7D /* rightFlag.png */; };
 		351759E31F338E7D0019E21A /* restartbutton copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759E21F338E7D0019E21A /* restartbutton copy.png */; };
 		351759E51F338E8C0019E21A /* exitbutton copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759E41F338E8C0019E21A /* exitbutton copy.png */; };
 		351759E71F3392D80019E21A /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759E61F3392D80019E21A /* playButton.png */; };
 		351759E91F3393D00019E21A /* MSButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351759E81F3393D00019E21A /* MSButtonNode.swift */; };
 		351759EB1F33C5E20019E21A /* menuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759EA1F33C5E20019E21A /* menuButton.png */; };
 		351759ED1F33C5EE0019E21A /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759EC1F33C5EE0019E21A /* pauseButton.png */; };
+		351759EF1F34FB910019E21A /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 351759EE1F34FB910019E21A /* beep.wav */; };
 		3521A2BE1F2FEE99009101F8 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3521A2BD1F2FEE99009101F8 /* MainMenu.sks */; };
 		3521A2C01F2FEEA9009101F8 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521A2BF1F2FEEA9009101F8 /* MainMenu.swift */; };
 		3568583E1F200DB6002C995C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3568583D1F200DB6002C995C /* AppDelegate.swift */; };
@@ -29,6 +35,10 @@
 		356858741F200F57002C995C /* CreateGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356858731F200F57002C995C /* CreateGrid.swift */; };
 		356858761F201103002C995C /* mazeWall.png in Resources */ = {isa = PBXBuildFile; fileRef = 356858751F201103002C995C /* mazeWall.png */; };
 		3578E5141F21178500383B05 /* Monsters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578E5131F21178500383B05 /* Monsters.swift */; };
+		35E5B6C71F3AD93D00DE7F8B /* mazeSample1p1.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E5B6C61F3AD93D00DE7F8B /* mazeSample1p1.png */; };
+		35E5B6C91F3AD94500DE7F8B /* mazeSample1p2.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E5B6C81F3AD94500DE7F8B /* mazeSample1p2.png */; };
+		35E5B6CB1F3AE1AE00DE7F8B /* InstructionsOpening.sks in Resources */ = {isa = PBXBuildFile; fileRef = 35E5B6CA1F3AE1AE00DE7F8B /* InstructionsOpening.sks */; };
+		35E5B6CD1F3AE1C900DE7F8B /* InstructionsWalls.sks in Resources */ = {isa = PBXBuildFile; fileRef = 35E5B6CC1F3AE1C900DE7F8B /* InstructionsWalls.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +59,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35136AC61F39501D005E0E7D /* PauseMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PauseMenu.sks; sourceTree = "<group>"; };
+		35136AC81F39502D005E0E7D /* PauseMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
+		35136ACC1F396970005E0E7D /* continueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = continueButton.png; path = ../../../../Downloads/continueButton.png; sourceTree = "<group>"; };
+		35136ACE1F3A2A3C005E0E7D /* leftFlag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leftFlag.png; path = ../../../../Downloads/leftFlag.png; sourceTree = "<group>"; };
+		35136AD01F3A2A42005E0E7D /* rightFlag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rightFlag.png; path = ../../../../Downloads/rightFlag.png; sourceTree = "<group>"; };
 		351759E21F338E7D0019E21A /* restartbutton copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "restartbutton copy.png"; path = "../../../../Downloads/restartbutton copy.png"; sourceTree = "<group>"; };
 		351759E41F338E8C0019E21A /* exitbutton copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exitbutton copy.png"; path = "../../../../Downloads/exitbutton copy.png"; sourceTree = "<group>"; };
 		351759E61F3392D80019E21A /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playButton.png; path = ../../../../Downloads/playButton.png; sourceTree = "<group>"; };
 		351759E81F3393D00019E21A /* MSButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSButtonNode.swift; sourceTree = "<group>"; };
 		351759EA1F33C5E20019E21A /* menuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuButton.png; path = ../../../../Downloads/menuButton.png; sourceTree = "<group>"; };
 		351759EC1F33C5EE0019E21A /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pauseButton.png; path = ../../../../Downloads/pauseButton.png; sourceTree = "<group>"; };
+		351759EE1F34FB910019E21A /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = beep.wav; path = ../../../../Downloads/beep.wav; sourceTree = "<group>"; };
 		3521A2BD1F2FEE99009101F8 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		3521A2BF1F2FEEA9009101F8 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		3568583A1F200DB6002C995C /* Path Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Path Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +93,10 @@
 		356858731F200F57002C995C /* CreateGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGrid.swift; sourceTree = "<group>"; };
 		356858751F201103002C995C /* mazeWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mazeWall.png; path = ../../../../Downloads/mazeWall.png; sourceTree = "<group>"; };
 		3578E5131F21178500383B05 /* Monsters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monsters.swift; sourceTree = "<group>"; };
+		35E5B6C61F3AD93D00DE7F8B /* mazeSample1p1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mazeSample1p1.png; path = ../../../../Downloads/mazeSample1p1.png; sourceTree = "<group>"; };
+		35E5B6C81F3AD94500DE7F8B /* mazeSample1p2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mazeSample1p2.png; path = ../../../../Downloads/mazeSample1p2.png; sourceTree = "<group>"; };
+		35E5B6CA1F3AE1AE00DE7F8B /* InstructionsOpening.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionsOpening.sks; sourceTree = "<group>"; };
+		35E5B6CC1F3AE1C900DE7F8B /* InstructionsWalls.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionsWalls.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,18 +152,28 @@
 				356858431F200DB6002C995C /* GameScene.swift */,
 				3521A2BD1F2FEE99009101F8 /* MainMenu.sks */,
 				3521A2BF1F2FEEA9009101F8 /* MainMenu.swift */,
+				35136AC61F39501D005E0E7D /* PauseMenu.sks */,
+				35136AC81F39502D005E0E7D /* PauseMenu.swift */,
+				35E5B6CA1F3AE1AE00DE7F8B /* InstructionsOpening.sks */,
+				35E5B6CC1F3AE1C900DE7F8B /* InstructionsWalls.sks */,
 				351759E81F3393D00019E21A /* MSButtonNode.swift */,
 				356858411F200DB6002C995C /* Actions.sks */,
 				356858711F200E1E002C995C /* CreateMaze.swift */,
 				3578E5131F21178500383B05 /* Monsters.swift */,
 				356858731F200F57002C995C /* CreateGrid.swift */,
 				356858451F200DB6002C995C /* GameViewController.swift */,
+				351759EE1F34FB910019E21A /* beep.wav */,
 				356858751F201103002C995C /* mazeWall.png */,
 				351759E21F338E7D0019E21A /* restartbutton copy.png */,
 				351759E41F338E8C0019E21A /* exitbutton copy.png */,
 				351759E61F3392D80019E21A /* playButton.png */,
 				351759EA1F33C5E20019E21A /* menuButton.png */,
 				351759EC1F33C5EE0019E21A /* pauseButton.png */,
+				35136ACC1F396970005E0E7D /* continueButton.png */,
+				35136ACE1F3A2A3C005E0E7D /* leftFlag.png */,
+				35136AD01F3A2A42005E0E7D /* rightFlag.png */,
+				35E5B6C61F3AD93D00DE7F8B /* mazeSample1p1.png */,
+				35E5B6C81F3AD94500DE7F8B /* mazeSample1p2.png */,
 				356858471F200DB6002C995C /* Main.storyboard */,
 				3568584A1F200DB6002C995C /* Assets.xcassets */,
 				3568584C1F200DB6002C995C /* LaunchScreen.storyboard */,
@@ -282,12 +312,21 @@
 				356858491F200DB6002C995C /* Main.storyboard in Resources */,
 				356858401F200DB6002C995C /* GameScene.sks in Resources */,
 				351759EB1F33C5E20019E21A /* menuButton.png in Resources */,
+				35136ACF1F3A2A3C005E0E7D /* leftFlag.png in Resources */,
 				351759E71F3392D80019E21A /* playButton.png in Resources */,
 				3568584B1F200DB6002C995C /* Assets.xcassets in Resources */,
 				3568584E1F200DB6002C995C /* LaunchScreen.storyboard in Resources */,
+				35136ACD1F396970005E0E7D /* continueButton.png in Resources */,
+				35E5B6C71F3AD93D00DE7F8B /* mazeSample1p1.png in Resources */,
 				351759E31F338E7D0019E21A /* restartbutton copy.png in Resources */,
 				351759ED1F33C5EE0019E21A /* pauseButton.png in Resources */,
+				35E5B6CD1F3AE1C900DE7F8B /* InstructionsWalls.sks in Resources */,
+				35136AD11F3A2A42005E0E7D /* rightFlag.png in Resources */,
+				351759EF1F34FB910019E21A /* beep.wav in Resources */,
+				35E5B6C91F3AD94500DE7F8B /* mazeSample1p2.png in Resources */,
+				35E5B6CB1F3AE1AE00DE7F8B /* InstructionsOpening.sks in Resources */,
 				3521A2BE1F2FEE99009101F8 /* MainMenu.sks in Resources */,
+				35136AC71F39501D005E0E7D /* PauseMenu.sks in Resources */,
 				351759E51F338E8C0019E21A /* exitbutton copy.png in Resources */,
 				356858421F200DB6002C995C /* Actions.sks in Resources */,
 			);
@@ -319,6 +358,7 @@
 				3521A2C01F2FEEA9009101F8 /* MainMenu.swift in Sources */,
 				3578E5141F21178500383B05 /* Monsters.swift in Sources */,
 				356858441F200DB6002C995C /* GameScene.swift in Sources */,
+				35136AC91F39502D005E0E7D /* PauseMenu.swift in Sources */,
 				356858461F200DB6002C995C /* GameViewController.swift in Sources */,
 				3568583E1F200DB6002C995C /* AppDelegate.swift in Sources */,
 				351759E91F3393D00019E21A /* MSButtonNode.swift in Sources */,

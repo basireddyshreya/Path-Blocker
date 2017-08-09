@@ -17,7 +17,7 @@ class MainMenu: SKScene {
     override func didMove(to view: SKView) {
         /* Set UI connections */
         buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
-        buttonPlay.selectedHandler = {
+        buttonPlay.selectedHandler = { [unowned self] in
             self.loadGame()
         }
     }
@@ -39,9 +39,9 @@ class MainMenu: SKScene {
         scene.scaleMode = .aspectFill
         
         /* Show debug */
-        skView.showsPhysics = true
-        skView.showsDrawCount = true
-        skView.showsFPS = true
+        skView.showsPhysics = false
+        skView.showsDrawCount = false
+        skView.showsFPS = false
         
         /* 4) Start game scene */
         skView.presentScene(scene)

@@ -9,6 +9,8 @@
 
 import SpriteKit
 import GameplayKit
+import AudioToolbox
+import AVFoundation
 
 enum wallSides {
     case upSide, downSide, leftSide, rightSide, noSide
@@ -18,20 +20,35 @@ enum GameSceneState {
     case gameStart, gameRunning, gameOver
 }
 
+enum WinState {
+    case win, lose
+}
+
 class GameScene: SKScene {
     var mazeWall: SKNode!
     var buttonRestart: MSButtonNode!
     var buttonMenu: MSButtonNode!
+    var buttonPause: MSButtonNode!
     var monsterNode: Monster!
     var monsterArray: [Monster] = []
     var maze = Maze(gridSize: 10)
     let wallTexture = SKTexture(imageNamed: "mazeWall")
     var tileSize = 0
     let fixedDelta: CFTimeInterval = 1.0 / 60.0 /* 60 FPS */
-    var gameState: GameSceneState = .gameRunning // THIS IS NEW FOR PUTTING THE GAMESCENE OF EITHER WINNING OR LOSING?
+    var gameState: GameSceneState = .gameStart
+    var winState: WinState = .win
     var countdown: Int = 60
+    var startingCountdown: Int = 3
     var countdownLabel: SKLabelNode!
+    var startingCountdownLabel: SKLabelNode!
     var gameOverLabel: SKLabelNode!
+    var gameBeginsLabel: SKLabelNode!
+    var youWinLabel: SKLabelNode!
+    var player: AVAudioPlayer?
+    var leftFlag: SKNode!
+    var rightFlag: SKNode!
+    var sideExitFlagArray: [SKNode] = []
+    var pauseMenuActive = false
 
     
     func getWallPosition(x : Int, y : Int, side: wallSides) -> CGPoint {
@@ -66,16 +83,27 @@ class GameScene: SKScene {
     }//end of func get wall position
     
     override func didMove(to view: SKView) {
+        
+        if pauseMenuActive == true {
+            pauseMenuActive = false
+            return
+        }
+        
         mazeWall = self.childNode(withName: "mazeWall")
         let monsterNode = self.childNode(withName: "monster") as! Monster
         countdownLabel = childNode(withName: "countdownLabel") as! SKLabelNode
+        startingCountdownLabel = childNode(withName: "startingCountdownLabel") as! SKLabelNode
         gameOverLabel = childNode(withName: "gameOverLabel") as! SKLabelNode
+        gameBeginsLabel = childNode(withName: "gameBeginsLabel") as! SKLabelNode
+        youWinLabel = childNode(withName: "youWinLabel") as! SKLabelNode
         scene?.isPaused = false
-//FINISH THIS YAY ***/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/**/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+        leftFlag = self.childNode(withName: "leftFlag")
+        rightFlag = self.childNode(withName: "rightFlag")
+
         
 //***************************THIS POINT IS ALL THE BUTTON RESTART STUFF DAMN******************************
         buttonRestart = self.childNode(withName: "buttonRestart") as! MSButtonNode
-        buttonRestart.selectedHandler = {
+        buttonRestart.selectedHandler = { [unowned self] in
             
             /* Grab reference to our SpriteKit view */
             let skView = self.view as SKView!
@@ -91,7 +119,7 @@ class GameScene: SKScene {
         }//end of button selection handler
         
         buttonMenu = self.childNode(withName: "buttonMenu") as! MSButtonNode
-        buttonMenu.selectedHandler = {
+        buttonMenu.selectedHandler = { [unowned self] in
             
             let skView = self.view as SKView!
         
@@ -101,16 +129,35 @@ class GameScene: SKScene {
             
             skView?.presentScene(scene)
         }//end of button selection handler
+        
+        buttonPause = self.childNode(withName: "buttonPause") as! MSButtonNode
+        buttonPause.selectedHandler = { [unowned self] in
+            self.pauseMenuActive = true
+            
+            let skView = self.view as SKView!
+            
+            let scene = PauseMenu(fileNamed:"PauseMenu") as PauseMenu!
+            
+            scene?.gameSceneObject = self
+            
+            scene?.scaleMode = .aspectFill
+            
+            skView?.presentScene(scene)
+            
+            
+        }//end of button selection handler
+
 
         
         buttonRestart.state = .MSButtonNodeStateHidden
         buttonMenu.state = .MSButtonNodeStateHidden
         gameOverLabel.isHidden = true
+        youWinLabel.isHidden = true
         
 //*************************FIND THE MAX SIZE OF THE SCREEN************************************
         let screenSize = UIScreen.main.bounds
-        let maxWidth = Int(screenSize.width) / 25 //maze.gridSize/2
-        let maxHeight = Int(screenSize.height) / 25 //maze.gridSize/2
+        let maxWidth = Int(screenSize.width) / 24 //maze.gridSize/2
+        let maxHeight = Int(screenSize.height) / 24 //maze.gridSize/2
         tileSize = max(maxWidth, maxHeight)
         
         //going through each cell and checking if it is true in order to place a wall
@@ -160,8 +207,11 @@ class GameScene: SKScene {
             }
         }
         
+        startingCountdownLabel.text = String(startingCountdown)
         countdownLabel.text = String(countdown)
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountDown), userInfo: nil, repeats: true)
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(gameStartCountDown), userInfo: nil, repeats: true)
+        
         
 //***************************THIS POINT IS ALL THE MONSTER STUFF WHOOO******************************
         
@@ -178,11 +228,17 @@ class GameScene: SKScene {
          monsterArray[1].position = ConvertGridPositionToLocationPoint(x: self.maze.gridSize+1, y: self.maze.yOpening!)
          monsterArray[1].currentPosition = (x: self.maze.gridSize+1, y: self.maze.yOpening!)
         
-         monsterArray[0].moveDown()
-         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameScene.moveMonster(timer:)), userInfo: 0, repeats: true)
-         
-         monsterArray[1].moveLeft()
-         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameScene.moveMonster(timer:)), userInfo: 1, repeats: true)
+        rightFlag.position = ConvertGridPositionToLocationPoint(x: self.maze.finalExit!+1, y: 0)
+        leftFlag.position = ConvertGridPositionToLocationPoint(x: self.maze.finalExit!-1, y: 0)
+
+        let newLeftFlag = leftFlag.copy() as! SKNode
+        addChild(newLeftFlag)
+        sideExitFlagArray.append(newLeftFlag)
+        let secondNewLeftFlag = leftFlag.copy() as! SKNode
+        addChild(secondNewLeftFlag)
+        sideExitFlagArray.append(secondNewLeftFlag)
+        sideExitFlagArray[0].position = ConvertGridPositionToLocationPoint(x: 0, y: self.maze.sideExit!+1)
+        sideExitFlagArray[1].position = ConvertGridPositionToLocationPoint(x: 0, y: self.maze.sideExit!-1)
         
 
     }//end of func didMove
@@ -223,7 +279,7 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if gameState == .gameOver {
+        if gameState == .gameOver || gameState == .gameStart {
             return
         }
         
@@ -244,7 +300,17 @@ class GameScene: SKScene {
             var isIncreasing: Bool = true
             var isChangingX: Bool = true
             
-//UPDATED THE CODE BELOW TO STOP AT PERPENDICULAR WALLS
+            if convertLocation.side == wallSides.upSide && (self.maze.up[x+1,y] == true || (self.maze.right[x,y] == true && self.maze.right[x,y+1] == true)) && (self.maze.up[x-1,y] == true || (self.maze.right[x-1,y] == true && self.maze.right[x-1,y+1] == true)) {
+                playInvalidWallSound()
+            } else if convertLocation.side == wallSides.downSide && (self.maze.down[x+1,y] == true || (self.maze.right[x,y] == true && self.maze.right[x,y-1] == true)) && (self.maze.down[x-1,y] == true || (self.maze.right[x-1,y] == true && self.maze.right[x-1,y-1] == true)) {
+                playInvalidWallSound()
+            } else if convertLocation.side == wallSides.leftSide && (self.maze.left[x,y+1] == true || (self.maze.up[x,y] == true && self.maze.up[x-1, y] == true)) && (self.maze.left[x,y-1] == true || (self.maze.up[x,y-1] == true && self.maze.up[x-1, y-1] == true)) {
+                playInvalidWallSound()
+            } else if convertLocation.side == wallSides.rightSide && (self.maze.right[x,y+1] == true || (self.maze.up[x,y] == true && self.maze.up[x+1, y] == true)) && (self.maze.right[x,y-1] == true || (self.maze.up[x,y-1] == true && self.maze.up[x+1, y-1] == true)) {
+                playInvalidWallSound()
+            }
+
+            
             if convertLocation.side == wallSides.downSide {
                 self.maze.down[x,y] = false
                 self.maze.up[x,y-1] = false
@@ -282,7 +348,8 @@ class GameScene: SKScene {
                     isIncreasing = false
                 }
             }//end of finding out which side was tapped on & setting that wall to false & seeing if the wall next to it is false (to know whether to increase/decrease)
-
+            
+            
             var newX = x
             var newY = y
             if (isIncreasing) {
@@ -352,10 +419,11 @@ class GameScene: SKScene {
             */
             
         }//end of nodeAtPoint = mazeWall if-then statement
+    
     }//end of func touchesBegan
     
     func moveMonster(timer: Timer) {
-        if gameState == .gameOver {
+        if gameState == .gameOver || pauseMenuActive == true {
             return
         }
         
@@ -365,7 +433,7 @@ class GameScene: SKScene {
         let currentY = monster.currentPosition.y
         var validExits: [wallSides] = []
         
-        if self.maze.right[currentX, currentY] == false && monster.entranceSideUsed != wallSides.rightSide && currentX != self.maze.gridSize && currentY != self.maze.yOpening {
+        if self.maze.right[currentX, currentY] == false && monster.entranceSideUsed != wallSides.rightSide && currentX != self.maze.gridSize {
             validExits.append(wallSides.rightSide)
         }
         if self.maze.left[currentX, currentY] == false && monster.entranceSideUsed != wallSides.leftSide {
@@ -382,7 +450,7 @@ class GameScene: SKScene {
         
         if validExits.count == 0 {
             if self.maze.up[currentX, currentY] == true && self.maze.down[currentX, currentY] == true && self.maze.right[currentX, currentY] == true && self.maze.left[currentX, currentY] == true {
-                gameState = .gameOver
+                return //make only one monster pause but the other one moves
             } else {
                 chosenExit = monster.entranceSideUsed
             }
@@ -403,35 +471,96 @@ class GameScene: SKScene {
         }
         
         if monster.currentPosition == (x: self.maze.finalExit!, y: 1) {
+            self.winState = .lose
             let delay = SKAction.wait(forDuration: 0.45)
             monster.run(delay) {
                 monster.moveDown()
                 self.gameState = .gameOver
             }
+        } else if monster.currentPosition == (x: 1, y: self.maze.sideExit!) {
+            self.winState = .lose
+            let delay = SKAction.wait(forDuration: 0.45)
+            monster.run(delay) {
+                monster.moveLeft()
+                self.gameState = .gameOver
+            }
+
         }
     }//end of func moveMonster
     
    func updateCountDown() {
-        if gameState == .gameOver {
+        if gameState == .gameOver || pauseMenuActive == true {
             return
         }
         countdown -= 1
         countdownLabel.text = String(countdown)
+    }//end of func updateCountDown
+    
+    func playInvalidWallSound() {
+        let url = Bundle.main.url(forResource: "beep", withExtension: "wav")!
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.prepareToPlay()
+            player.play()
+        } catch let error as NSError {
+            print(error.description)
+        }
     }
+    
+    func gameStartCountDown() {
+        if gameState == .gameRunning || pauseMenuActive == true {
+            return
+        }
+        
+        startingCountdown -= 1
+        startingCountdownLabel.text = String(startingCountdown)
+        
+        if startingCountdown == 0 {
+            changeGameState()
+            runTheGame()
+        }
+    }//end of func updateCountDown
+    
+    func changeGameState() {
+        gameState = .gameRunning
+    }
+    
+    func runTheGame() {
+        if gameState == .gameRunning {
+            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountDown), userInfo: nil, repeats: true)
+        
+            monsterArray[0].moveDown()
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameScene.moveMonster(timer:)), userInfo: 0, repeats: true)
+            
+            monsterArray[1].moveLeft()
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(GameScene.moveMonster(timer:)), userInfo: 1, repeats: true)
+        }
+    }//end of func run the game
+
     
     override func update(_ currentTime: CFTimeInterval) {
         if countdown == 0 {
             gameState = .gameOver
         }
         
-        //if countdown == 30 {
-        //    scene?.isPaused = true
-        //}
-        
         if gameState == .gameOver {
             buttonRestart.state = .MSButtonNodeStateActive
             buttonMenu.state = .MSButtonNodeStateActive
-            gameOverLabel.isHidden = false
+            buttonPause.state = .MSButtonNodeStateHidden
+            if winState == .win {
+                youWinLabel.isHidden = false
+            } else {
+                gameOverLabel.isHidden = false
+            }
+        }
+        
+        if gameState == .gameRunning {
+            startingCountdownLabel.isHidden = true
+            gameBeginsLabel.isHidden = true
+            buttonPause.state = .MSButtonNodeStateActive
         }
     }//end of update func
     
