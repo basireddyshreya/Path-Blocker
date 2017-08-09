@@ -248,7 +248,7 @@ class GameScene: SKScene {
     func ConvertGridPositionToLocationPoint(x: Int, y: Int) -> (CGPoint) {
         //self.maze.visitedCells[x,y]
         let gridX = x * tileSize + tileSize/2
-        let gridY = y * tileSize + tileSize/2
+        let gridY = y * tileSize + (tileSize/2 + 70)
         let locationPoint = CGPoint(x: gridX, y: gridY)
         return (locationPoint)
     }//end of ConvertGridPositionToLocationPoint
@@ -257,7 +257,7 @@ class GameScene: SKScene {
         var xPoint: CGFloat
         var yPoint: CGFloat
         xPoint = location.x / CGFloat(tileSize)
-        yPoint = location.y / CGFloat(tileSize)
+        yPoint = (location.y - 70) / CGFloat(tileSize)
         let yPointRemainder = yPoint.truncatingRemainder(dividingBy: 1)
         let xPointRemainder = xPoint.truncatingRemainder(dividingBy: 1)
         var wallSide: wallSides

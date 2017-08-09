@@ -13,6 +13,8 @@ class MainMenu: SKScene {
     
     /* UI Connections */
     var buttonPlay: MSButtonNode!
+    var buttonHowToPlay: MSButtonNode!
+    var buttonCredits: MSButtonNode!
     
     override func didMove(to view: SKView) {
         /* Set UI connections */
@@ -20,6 +22,17 @@ class MainMenu: SKScene {
         buttonPlay.selectedHandler = { [unowned self] in
             self.loadGame()
         }
+        
+        buttonHowToPlay = self.childNode(withName: "buttonHowToPlay") as! MSButtonNode
+        buttonHowToPlay.selectedHandler = { [unowned self] in
+            self.loadInstructions()
+        }
+        
+        buttonCredits = self.childNode(withName: "buttonCredits") as! MSButtonNode
+        buttonCredits.selectedHandler = { [unowned self] in
+            self.loadCreditsPage()
+        }
+
     }
     
     func loadGame() {
@@ -46,4 +59,54 @@ class MainMenu: SKScene {
         /* 4) Start game scene */
         skView.presentScene(scene)
     }
+    
+    func loadInstructions() {
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = InstructionsOpening(fileNamed:"InstructionsOpening") else {
+            print("Could not make InstructionsOpening, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = false
+        skView.showsDrawCount = false
+        skView.showsFPS = false
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
+    func loadCreditsPage() {
+        guard let skView = self.view as SKView! else {
+            print("Could not get Skview")
+            return
+        }
+        
+        /* 2) Load Game scene */
+        guard let scene = Credits(fileNamed:"Credits") else {
+            print("Could not make InstructionsOpening, check the name is spelled correctly")
+            return
+        }
+        
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+        
+        /* Show debug */
+        skView.showsPhysics = false
+        skView.showsDrawCount = false
+        skView.showsFPS = false
+        
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+        
+    }
+
 }
