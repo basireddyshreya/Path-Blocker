@@ -112,7 +112,7 @@ class GameScene: SKScene {
             let scene = GameScene(fileNamed:"GameScene") as GameScene!
             
             /* Ensure correct aspect mode */
-            scene?.scaleMode = .aspectFill
+            scene?.scaleMode = .aspectFit
             
             /* Restart game scene */
             skView?.presentScene(scene)
@@ -125,7 +125,7 @@ class GameScene: SKScene {
         
             let scene = MainMenu(fileNamed:"MainMenu") as MainMenu!
             
-            scene?.scaleMode = .aspectFill
+            scene?.scaleMode = .aspectFit
             
             skView?.presentScene(scene)
         }//end of button selection handler
@@ -140,7 +140,7 @@ class GameScene: SKScene {
             
             scene?.gameSceneObject = self
             
-            scene?.scaleMode = .aspectFill
+            scene?.scaleMode = .aspectFit
             
             skView?.presentScene(scene)
             
@@ -155,10 +155,9 @@ class GameScene: SKScene {
         youWinLabel.isHidden = true
         
 //*************************FIND THE MAX SIZE OF THE SCREEN************************************
-        let screenSize = UIScreen.main.bounds
-        let maxWidth = Int(screenSize.width) / 24 //maze.gridSize/2
-        let maxHeight = Int(screenSize.height) / 24 //maze.gridSize/2
-        tileSize = max(maxWidth, maxHeight)
+        let maxWidth = 320 / (self.maze.gridSize+2) //24 //maze.gridSize/2
+        let maxHeight = 568 / (self.maze.gridSize+2) //24 //maze.gridSize/2
+        tileSize = min(maxWidth, maxHeight)
         
         //going through each cell and checking if it is true in order to place a wall
         for x in 0..<self.maze.gridSize+1 {
@@ -247,7 +246,7 @@ class GameScene: SKScene {
     
     func ConvertGridPositionToLocationPoint(x: Int, y: Int) -> (CGPoint) {
         //self.maze.visitedCells[x,y]
-        let gridX = x * tileSize + tileSize/2
+        let gridX = x * tileSize + (tileSize/2 + 5)
         let gridY = y * tileSize + (tileSize/2 + 70)
         let locationPoint = CGPoint(x: gridX, y: gridY)
         return (locationPoint)
@@ -256,7 +255,7 @@ class GameScene: SKScene {
     func ConvertLocationPointToGridPosition(location: CGPoint) -> (x: Int, y: Int, side: wallSides) {
         var xPoint: CGFloat
         var yPoint: CGFloat
-        xPoint = location.x / CGFloat(tileSize)
+        xPoint = (location.x - 5) / CGFloat(tileSize)
         yPoint = (location.y - 70) / CGFloat(tileSize)
         let yPointRemainder = yPoint.truncatingRemainder(dividingBy: 1)
         let xPointRemainder = xPoint.truncatingRemainder(dividingBy: 1)

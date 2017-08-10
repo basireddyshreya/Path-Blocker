@@ -20,14 +20,12 @@
 		3514672F1F3B921E0090BA18 /* InstructionsWinning.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3514672E1F3B921E0090BA18 /* InstructionsWinning.sks */; };
 		351467311F3B92470090BA18 /* InstructionsWinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351467301F3B92470090BA18 /* InstructionsWinning.swift */; };
 		351467331F3B97900090BA18 /* mazeSample2p6.png in Resources */ = {isa = PBXBuildFile; fileRef = 351467321F3B97900090BA18 /* mazeSample2p6.png */; };
-		351467351F3B98640090BA18 /* Circle-PNG-Picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 351467341F3B98640090BA18 /* Circle-PNG-Picture.png */; };
 		351467371F3B990A0090BA18 /* 200px-Green8ABF3C_circle_100%.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 351467361F3B990A0090BA18 /* 200px-Green8ABF3C_circle_100%.svg.png */; };
 		3514673A1F3BB10A0090BA18 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 351467391F3BB10A0090BA18 /* arrow.png */; };
 		3514673C1F3BBC370090BA18 /* Credits.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3514673B1F3BBC370090BA18 /* Credits.sks */; };
 		3514673E1F3BBD200090BA18 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514673D1F3BBD200090BA18 /* Credits.swift */; };
 		351467401F3BC29C0090BA18 /* creditsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3514673F1F3BC29C0090BA18 /* creditsButton.png */; };
 		351467421F3BD9D10090BA18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 351467411F3BD9D10090BA18 /* LaunchScreen.storyboard */; };
-		351467441F3BD9FC0090BA18 /* AppIconTest2.png in Resources */ = {isa = PBXBuildFile; fileRef = 351467431F3BD9FC0090BA18 /* AppIconTest2.png */; };
 		3514674C1F3BE02D0090BA18 /* AppIconTest4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3514674B1F3BE02D0090BA18 /* AppIconTest4.png */; };
 		351759E31F338E7D0019E21A /* restartbutton copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759E21F338E7D0019E21A /* restartbutton copy.png */; };
 		351759E51F338E8C0019E21A /* exitbutton copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 351759E41F338E8C0019E21A /* exitbutton copy.png */; };
@@ -97,14 +95,12 @@
 		3514672E1F3B921E0090BA18 /* InstructionsWinning.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionsWinning.sks; sourceTree = "<group>"; };
 		351467301F3B92470090BA18 /* InstructionsWinning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsWinning.swift; sourceTree = "<group>"; };
 		351467321F3B97900090BA18 /* mazeSample2p6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mazeSample2p6.png; path = ../../../../Downloads/mazeSample2p6.png; sourceTree = "<group>"; };
-		351467341F3B98640090BA18 /* Circle-PNG-Picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Circle-PNG-Picture.png"; path = "../../../../Downloads/Circle-PNG-Picture.png"; sourceTree = "<group>"; };
 		351467361F3B990A0090BA18 /* 200px-Green8ABF3C_circle_100%.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "200px-Green8ABF3C_circle_100%.svg.png"; path = "../../../../Downloads/200px-Green8ABF3C_circle_100%.svg.png"; sourceTree = "<group>"; };
 		351467391F3BB10A0090BA18 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = ../../../../Downloads/arrow.png; sourceTree = "<group>"; };
 		3514673B1F3BBC370090BA18 /* Credits.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Credits.sks; sourceTree = "<group>"; };
 		3514673D1F3BBD200090BA18 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		3514673F1F3BC29C0090BA18 /* creditsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditsButton.png; path = ../../../../Downloads/creditsButton.png; sourceTree = "<group>"; };
 		351467411F3BD9D10090BA18 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		351467431F3BD9FC0090BA18 /* AppIconTest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIconTest2.png; path = ../../../../Downloads/AppIconTest2.png; sourceTree = "<group>"; };
 		3514674B1F3BE02D0090BA18 /* AppIconTest4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIconTest4.png; path = ../../../../Downloads/AppIconTest4.png; sourceTree = "<group>"; };
 		351759E21F338E7D0019E21A /* restartbutton copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "restartbutton copy.png"; path = "../../../../Downloads/restartbutton copy.png"; sourceTree = "<group>"; };
 		351759E41F338E8C0019E21A /* exitbutton copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exitbutton copy.png"; path = "../../../../Downloads/exitbutton copy.png"; sourceTree = "<group>"; };
@@ -262,7 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				3514674B1F3BE02D0090BA18 /* AppIconTest4.png */,
-				351467431F3BD9FC0090BA18 /* AppIconTest2.png */,
 				3514673F1F3BC29C0090BA18 /* creditsButton.png */,
 				351467391F3BB10A0090BA18 /* arrow.png */,
 				351467361F3B990A0090BA18 /* 200px-Green8ABF3C_circle_100%.svg.png */,
@@ -286,7 +281,6 @@
 				351467281F3B88680090BA18 /* mazeSample2P3.png */,
 				3514672A1F3B889B0090BA18 /* mazeSample2P4.png */,
 				3514672C1F3B88A20090BA18 /* mazeSample2P5.png */,
-				351467341F3B98640090BA18 /* Circle-PNG-Picture.png */,
 			);
 			name = "png files";
 			sourceTree = "<group>";
@@ -359,7 +353,7 @@
 				TargetAttributes = {
 					356858391F200DB6002C995C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6W7KV4JKVK;
+						DevelopmentTeam = LQXVA4QKY4;
 						ProvisioningStyle = Automatic;
 					};
 					356858531F200DB6002C995C = {
@@ -423,7 +417,6 @@
 				351759ED1F33C5EE0019E21A /* pauseButton.png in Resources */,
 				35E5B6CD1F3AE1C900DE7F8B /* InstructionsWalls.sks in Resources */,
 				35136AD11F3A2A42005E0E7D /* rightFlag.png in Resources */,
-				351467441F3BD9FC0090BA18 /* AppIconTest2.png in Resources */,
 				351759EF1F34FB910019E21A /* beep.wav in Resources */,
 				35E5B6C91F3AD94500DE7F8B /* mazeSample1p2.png in Resources */,
 				35E5B6CB1F3AE1AE00DE7F8B /* InstructionsOpening.sks in Resources */,
@@ -438,7 +431,6 @@
 				3514673A1F3BB10A0090BA18 /* arrow.png in Resources */,
 				35136AC71F39501D005E0E7D /* PauseMenu.sks in Resources */,
 				351759E51F338E8C0019E21A /* exitbutton copy.png in Resources */,
-				351467351F3B98640090BA18 /* Circle-PNG-Picture.png in Resources */,
 				356858421F200DB6002C995C /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,12 +623,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6W7KV4JKVK;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LQXVA4QKY4;
 				INFOPLIST_FILE = "Path Blocker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "shreya.Path-Blocker";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shamiahuja.pathblocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -646,12 +640,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6W7KV4JKVK;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LQXVA4QKY4;
 				INFOPLIST_FILE = "Path Blocker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "shreya.Path-Blocker";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shamiahuja.pathblocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

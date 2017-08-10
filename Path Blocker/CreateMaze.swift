@@ -129,17 +129,19 @@ class Maze {
         
         up[Int(xEntrance),gridSize] = false
         
-        up[Int(exit),0] = false
-      /*  up[Int(exit), 1] = false
-        left[Int(exit), 1] = false
-        right[Int(exit), 1] = false */
+        up[finalExit!,0] = false
+        up[finalExit!, 1] = false
+        left[finalExit!, 1] = false
+        right[finalExit!-1, 1] = false
+        right[finalExit!, 1] = false
         
         right[gridSize, Int(yEntrance)] = false
         
-        right[0, Int(sideExit!)] = false
-       /* up[1, Int(sideExit!)] = false
-        down[1, Int(sideExit!)] = false
-        right[1, Int(sideExit!)] = false */
+        right[0, sideExit!] = false
+        up[1, sideExit!] = false
+        down[1, sideExit!] = false
+        up[1, sideExit!-1] = false
+        right[1, sideExit!] = false
 
     }//end of func createOpenings
 
